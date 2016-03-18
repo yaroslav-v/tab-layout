@@ -66,6 +66,25 @@ mTabLayout.addTab(mTabLayout.newTab().setText(R.string.title_tabbar_tab2)
 | tabOrientation   | Tab orientation: horizontal or vertical (like in LinearLayout) | 
 
 
+# Download
+
+Step 1. Add the JitPack repository to your build file.
+```
+repositories {
+    // ...
+    maven { url "https://jitpack.io" }
+}
+```
+
+Step 2. Add the dependency.
+```
+dependencies {
+    compile 'com.github.yaroslav-v:tab-layout:v1'
+}
+```
+
+That's it! The first time you request a project JitPack checks out the code, builds it and serves the build artifacts. 
+
 # Copyright
 ```
 Copyright 2016 Yaroslav Veykov, Genie in a Bottle studio
