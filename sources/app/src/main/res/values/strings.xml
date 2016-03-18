@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">TabLayoutExample</string>
-    <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <string name="title_activity_main">MainActivity</string>
     <string name="button_dynamic_tabs">Dynamic Tabs</string>
     <string name="button_static_tabs">Static Tabs</string>
     <string name="title_activity_dynamic_tabs">DynamicTabsActivity</string>
