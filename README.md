@@ -1,3 +1,5 @@
+[![Release](https://img.shields.io/github/release/yaroslav-v/tab-layout.svg?label=JitPack)](https://jitpack.io/#yaroslav-v/tab-layout) [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
+
 # Extended TabLayout from Android Design Library
 
 ![Freelancer](resources/assets/readme_1.jpg)
