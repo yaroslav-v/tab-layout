@@ -2,7 +2,7 @@
 
 # Extended TabLayout from Android Design Library
 
-![Freelancer](resources/assets/readme_1.jpg)
+![Extended TabLayout](resources/assets/readme_1.jpg)
 
 Extended TabLayout from Android Design Library with some additions for better handling of tabs switching and placement of tab bar on the screen.
 
@@ -81,7 +81,7 @@ repositories {
 Step 2. Add the dependency.
 ```
 dependencies {
-    compile 'com.github.yaroslav-v:tab-layout:v1'
+    compile 'com.github.yaroslav-v:tab-layout:v1.0.2'
 }
 ```
 
