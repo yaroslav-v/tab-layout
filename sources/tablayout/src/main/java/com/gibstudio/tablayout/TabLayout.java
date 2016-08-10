@@ -11,7 +11,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v7.widget.TintManager;
+import android.support.v7.widget.AppCompatDrawableManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -995,7 +995,7 @@ public class TabLayout extends HorizontalScrollView {
          * @return The current instance for call chaining
          */
         public Tab setIcon(int resId) {
-            return setIcon(TintManager.getDrawable(mParent.getContext(), resId));
+            return setIcon(AppCompatDrawableManager.get().getDrawable(mParent.getContext(), resId));
         }
 
         /**
@@ -1091,7 +1091,8 @@ public class TabLayout extends HorizontalScrollView {
             super(context);
             mTab = tab;
             if (mTabBackgroundResId != 0) {
-                setBackgroundDrawable(TintManager.getDrawable(context, mTabBackgroundResId));
+                setBackgroundDrawable(AppCompatDrawableManager.get().getDrawable(context,
+                        mTabBackgroundResId));
             }
             ViewCompat.setPaddingRelative(this, mTabPaddingStart, mTabPaddingTop,
                     mTabPaddingEnd, mTabPaddingBottom);
