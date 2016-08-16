@@ -37,6 +37,7 @@ captures/
 
 # IDE configuration
 .idea/
+*.iml
 
 ############################
 ## Apple iOS, Objective-C ##
