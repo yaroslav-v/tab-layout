@@ -81,7 +81,7 @@ repositories {
 Step 2. Add the dependency.
 ```
 dependencies {
-    compile 'com.github.yaroslav-v:tab-layout:v1.0.3'
+    compile 'com.github.yaroslav-v:tab-layout:1.0.4'
 }
 ```
 
