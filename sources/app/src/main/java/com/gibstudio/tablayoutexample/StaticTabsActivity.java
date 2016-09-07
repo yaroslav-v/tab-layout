@@ -26,6 +26,11 @@ public class StaticTabsActivity extends AppCompatActivity implements TabLayout.O
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.title_tabbar_tab2)
                 .setIcon(R.drawable.tabbar_tab2));
         mTabLayout.setOnTabAnimationListener(this);
+
+        // change colors programmatically
+        mTabLayout.setBackgroundResource(R.color.colorPrimary);
+        mTabLayout.setTabSelectedTextColor(getResources().getColor(R.color.colorAccent));
+        mTabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.text_color_dark));
     }
 
     @Override
