@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
@@ -238,6 +239,26 @@ public class TabLayout extends HorizontalScrollView {
 
         // Now apply the tab mode and gravity
         applyModeAndGravity();
+    }
+
+    /**
+     * Sets the tab indicator's color for the currently selected tab.
+     *
+     * @param color color to use for the indicator
+     * @attr ref android.support.design.R.styleable#TabLayout_tabIndicatorColor
+     */
+    public void setSelectedTabIndicatorColor(@ColorInt int color) {
+        mTabStrip.setSelectedIndicatorColor(color);
+    }
+
+    /**
+     * Sets the tab indicator's height for the currently selected tab.
+     *
+     * @param height height to use for the indicator in pixels
+     * @attr ref android.support.design.R.styleable#TabLayout_tabIndicatorHeight
+     */
+    public void setSelectedTabIndicatorHeight(int height) {
+        mTabStrip.setSelectedIndicatorHeight(height);
     }
 
     /**
@@ -592,7 +613,7 @@ public class TabLayout extends HorizontalScrollView {
      *
      * @param textColor
      */
-    public void setTabSelectedTextColor(int textColor) {
+    public void setTabSelectedTextColor(@ColorInt int textColor) {
         if (!mTabSelectedTextColorSet || mTabSelectedTextColor != textColor) {
             mTabSelectedTextColor = textColor;
             mTabSelectedTextColorSet = true;
@@ -1191,21 +1212,29 @@ public class TabLayout extends HorizontalScrollView {
                 if (hasText) {
                     if (mTextView == null) {
                         TextView textView = new TextView(getContext());
-                        textView.setTextAppearance(getContext(), mTabTextAppearance);
                         textView.setMaxLines(MAX_TAB_TEXT_LINES);
                         textView.setEllipsize(TextUtils.TruncateAt.END);
                         textView.setGravity(Gravity.CENTER);
-                        if (mTabSelectedTextColorSet) {
-                            textView.setTextColor(createColorStateList(
-                                    textView.getCurrentTextColor(), mTabSelectedTextColor));
-                        }
 
                         addView(textView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                         mTextView = textView;
                     }
+
+                    mTextView.setTextAppearance(getContext(), mTabTextAppearance);
+                    if (mTabSelectedTextColorSet) {
+                        mTextView.setTextColor(createColorStateList(
+                                mTextView.getCurrentTextColor(), mTabSelectedTextColor));
+                    }
+
                     mTextView.setText(text);
                     mTextView.setVisibility(VISIBLE);
                 } else if (mTextView != null) {
+                    mTextView.setTextAppearance(getContext(), mTabTextAppearance);
+                    if (mTabSelectedTextColorSet) {
+                        mTextView.setTextColor(createColorStateList(
+                                mTextView.getCurrentTextColor(), mTabSelectedTextColor));
+                    }
+
                     mTextView.setVisibility(GONE);
                     mTextView.setText(null);
                 }
