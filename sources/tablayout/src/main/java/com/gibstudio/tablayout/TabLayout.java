@@ -159,6 +159,7 @@ public class TabLayout extends HorizontalScrollView {
     private int mTabPaddingTop;
     private int mTabPaddingEnd;
     private int mTabPaddingBottom;
+    private int mTabPaddingInternal;
 
     private final int mTabTextAppearance;
     private int mTabSelectedTextColor;
@@ -212,8 +213,8 @@ public class TabLayout extends HorizontalScrollView {
         mTabTextAppearance = a.getResourceId(R.styleable.TabLayout_tabTextAppearance,
                 R.style.TextAppearance_Design_Tab);
 
-        mTabPaddingStart = mTabPaddingTop = mTabPaddingEnd = mTabPaddingBottom = a
-                .getDimensionPixelSize(R.styleable.TabLayout_tabPadding, 0);
+        mTabPaddingStart = mTabPaddingTop = mTabPaddingEnd = mTabPaddingBottom = mTabPaddingInternal =
+                a.getDimensionPixelSize(R.styleable.TabLayout_tabPadding, 0);
         mTabPaddingStart = a.getDimensionPixelSize(R.styleable.TabLayout_tabPaddingStart,
                 mTabPaddingStart);
         mTabPaddingTop = a.getDimensionPixelSize(R.styleable.TabLayout_tabPaddingTop,
@@ -222,6 +223,8 @@ public class TabLayout extends HorizontalScrollView {
                 mTabPaddingEnd);
         mTabPaddingBottom = a.getDimensionPixelSize(R.styleable.TabLayout_tabPaddingBottom,
                 mTabPaddingBottom);
+        mTabPaddingInternal = a.getDimensionPixelSize(R.styleable.TabLayout_tabPaddingInternal,
+                mTabPaddingInternal);
 
         if (a.hasValue(R.styleable.TabLayout_tabSelectedTextColor)) {
             mTabSelectedTextColor = a.getColor(R.styleable.TabLayout_tabSelectedTextColor, 0);
@@ -1195,9 +1198,17 @@ public class TabLayout extends HorizontalScrollView {
                         ImageView iconView = new ImageView(getContext());
                         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
                                 LayoutParams.WRAP_CONTENT);
-//                        lp.gravity = Gravity.CENTER_VERTICAL;
                         lp.gravity = Gravity.CENTER;
                         iconView.setLayoutParams(lp);
+
+                        if (mTabOrientation == HORIZONTAL) {
+                            ViewCompat.setPaddingRelative(iconView, 0, 0,
+                                    mTabPaddingInternal, 0);
+                        } else {
+                            ViewCompat.setPaddingRelative(iconView, 0, 0,
+                                    0, mTabPaddingInternal);
+                        }
+
                         addView(iconView, 0);
                         mIconView = iconView;
                     }

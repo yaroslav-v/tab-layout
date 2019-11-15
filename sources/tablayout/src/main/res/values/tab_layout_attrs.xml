@@ -33,6 +33,7 @@
         <attr name="tabPaddingEnd" format="dimension" />
         <attr name="tabPaddingBottom" format="dimension" />
         <attr name="tabPadding" format="dimension" />
+        <attr name="tabPaddingInternal" format="dimension" />
     </declare-styleable>
 
 </resources>
