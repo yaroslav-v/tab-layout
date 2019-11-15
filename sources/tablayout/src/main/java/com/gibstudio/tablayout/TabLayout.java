@@ -6,13 +6,13 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v7.widget.AppCompatDrawableManager;
+import androidx.annotation.ColorInt;
+import androidx.core.view.GravityCompat;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.core.view.ViewCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+import androidx.appcompat.widget.AppCompatDrawableManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -159,6 +159,7 @@ public class TabLayout extends HorizontalScrollView {
     private int mTabPaddingTop;
     private int mTabPaddingEnd;
     private int mTabPaddingBottom;
+    private int mTabPaddingInternal;
 
     private final int mTabTextAppearance;
     private int mTabSelectedTextColor;
@@ -212,8 +213,8 @@ public class TabLayout extends HorizontalScrollView {
         mTabTextAppearance = a.getResourceId(R.styleable.TabLayout_tabTextAppearance,
                 R.style.TextAppearance_Design_Tab);
 
-        mTabPaddingStart = mTabPaddingTop = mTabPaddingEnd = mTabPaddingBottom = a
-                .getDimensionPixelSize(R.styleable.TabLayout_tabPadding, 0);
+        mTabPaddingStart = mTabPaddingTop = mTabPaddingEnd = mTabPaddingBottom = mTabPaddingInternal =
+                a.getDimensionPixelSize(R.styleable.TabLayout_tabPadding, 0);
         mTabPaddingStart = a.getDimensionPixelSize(R.styleable.TabLayout_tabPaddingStart,
                 mTabPaddingStart);
         mTabPaddingTop = a.getDimensionPixelSize(R.styleable.TabLayout_tabPaddingTop,
@@ -222,6 +223,8 @@ public class TabLayout extends HorizontalScrollView {
                 mTabPaddingEnd);
         mTabPaddingBottom = a.getDimensionPixelSize(R.styleable.TabLayout_tabPaddingBottom,
                 mTabPaddingBottom);
+        mTabPaddingInternal = a.getDimensionPixelSize(R.styleable.TabLayout_tabPaddingInternal,
+                mTabPaddingInternal);
 
         if (a.hasValue(R.styleable.TabLayout_tabSelectedTextColor)) {
             mTabSelectedTextColor = a.getColor(R.styleable.TabLayout_tabSelectedTextColor, 0);
@@ -440,7 +443,7 @@ public class TabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the {@link android.support.design.widget.TabLayout.OnTabSelectedListener} that will handle switching to and from tabs.
+     * Set the {@link com.google.android.material.tabs.TabLayout.OnTabSelectedListener} that will handle switching to and from tabs.
      *
      * @param onTabSelectedListener Listener to handle tab selection events
      */
@@ -1195,9 +1198,17 @@ public class TabLayout extends HorizontalScrollView {
                         ImageView iconView = new ImageView(getContext());
                         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
                                 LayoutParams.WRAP_CONTENT);
-//                        lp.gravity = Gravity.CENTER_VERTICAL;
                         lp.gravity = Gravity.CENTER;
                         iconView.setLayoutParams(lp);
+
+                        if (mTabOrientation == HORIZONTAL) {
+                            ViewCompat.setPaddingRelative(iconView, 0, 0,
+                                    mTabPaddingInternal, 0);
+                        } else {
+                            ViewCompat.setPaddingRelative(iconView, 0, 0,
+                                    0, mTabPaddingInternal);
+                        }
+
                         addView(iconView, 0);
                         mIconView = iconView;
                     }

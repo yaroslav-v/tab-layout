@@ -19,8 +19,9 @@
         app:tabIndicatorGravity="top"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
-        app:tabOrientation="vertical"
-        app:tabPaddingTop="@dimen/bottom_tabbar_padding_vertical"
+        app:tabOrientation="horizontal"
+        app:tabPaddingStart="@dimen/bottom_tabbar_padding_vertical"
+        app:tabPaddingInternal="@dimen/bottom_tabbar_padding_vertical"
         app:tabSelectedTextColor="@color/text_color_dark"
         app:tabTextAppearance="@style/AppTheme.Navigation" />
 
