@@ -6,13 +6,13 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v7.widget.AppCompatDrawableManager;
+import androidx.annotation.ColorInt;
+import androidx.core.view.GravityCompat;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.core.view.ViewCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+import androidx.appcompat.widget.AppCompatDrawableManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -440,7 +440,7 @@ public class TabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the {@link android.support.design.widget.TabLayout.OnTabSelectedListener} that will handle switching to and from tabs.
+     * Set the {@link com.google.android.material.tabs.TabLayout.OnTabSelectedListener} that will handle switching to and from tabs.
      *
      * @param onTabSelectedListener Listener to handle tab selection events
      */
