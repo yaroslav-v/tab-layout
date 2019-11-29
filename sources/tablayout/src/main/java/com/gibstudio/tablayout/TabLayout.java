@@ -6,13 +6,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.ColorInt;
-import androidx.core.view.GravityCompat;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.core.view.ViewCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
-import androidx.appcompat.widget.AppCompatDrawableManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -29,6 +22,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -150,6 +151,19 @@ public class TabLayout extends HorizontalScrollView {
         public void onTabAnimationEnd(Tab tab);
     }
 
+    /**
+     * Callback interface invoked when a user has clicked a tab.
+     */
+    public interface OnTabClickedListener {
+
+        /**
+         * Called when a tab has been clicked.
+         *
+         * @param tab The tab that was clicked
+         */
+        public void onTabClicked(Tab tab);
+    }
+
     private final ArrayList<Tab> mTabs = new ArrayList<>();
     private Tab mSelectedTab;
 
@@ -178,6 +192,7 @@ public class TabLayout extends HorizontalScrollView {
 
     private OnTabSelectedListener mOnTabSelectedListener;
     private OnTabAnimationListener mOnTabAnimationListener;
+    private OnTabClickedListener mOnTabClickedListener;
     private OnClickListener mTabClickListener;
 
     public TabLayout(Context context) {
@@ -443,7 +458,7 @@ public class TabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the {@link com.google.android.material.tabs.TabLayout.OnTabSelectedListener} that will handle switching to and from tabs.
+     * Set the listener that will handle switching to and from tabs.
      *
      * @param onTabSelectedListener Listener to handle tab selection events
      */
@@ -458,6 +473,15 @@ public class TabLayout extends HorizontalScrollView {
      */
     public void setOnTabAnimationListener(OnTabAnimationListener onTabAnimationListener) {
         mOnTabAnimationListener = onTabAnimationListener;
+    }
+
+    /**
+     * Set the listener that will handle switching to and from tabs.
+     *
+     * @param onTabClickedListener Listener to handle tab click events
+     */
+    public void setOnTabClickedListener(OnTabClickedListener onTabClickedListener) {
+        mOnTabClickedListener = onTabClickedListener;
     }
 
     /**
@@ -642,8 +666,12 @@ public class TabLayout extends HorizontalScrollView {
             mTabClickListener = new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    TabView tabView = (TabView) view;
-                    tabView.getTab().select();
+                    Tab tab = ((TabView) view).getTab();
+                    tab.select();
+
+                    if (mOnTabClickedListener != null) {
+                        mOnTabClickedListener.onTabClicked(tab);
+                    }
                 }
             };
         }
