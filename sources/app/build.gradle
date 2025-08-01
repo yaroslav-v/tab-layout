@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    namespace "com.gibstudio.tablayoutexample"
+
+    compileSdkVersion 36
 
     defaultConfig {
         applicationId "com.gibstudio.tablayoutexample"
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 28
-        versionCode 103
-        versionName "1.0.3"
+        versionCode 104
+        versionName "1.0.4"
     }
     buildTypes {
         release {
@@ -21,7 +22,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation project(":tablayout")
 }
