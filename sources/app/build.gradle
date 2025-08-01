@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.gibstudio.tablayoutexample"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 33
         versionCode 104
         versionName "1.0.4"
     }
