@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android {
     namespace "com.gibstudio.tablayout"
@@ -17,10 +18,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    publishing {
+        singleVariant("release")
+    }
 }
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.13.2'
     api 'com.google.android.material:material:1.12.0'
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.yaroslav-v'
+            artifactId = 'tab-layout'
+            version = '1.0.8'
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
 }
